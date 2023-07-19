@@ -12,11 +12,14 @@ const gameBoard = (function() {
     markPlayer = (box) => {
         // Mark the box based on who's turn is it
         box.classList.remove('unmarked')
-        if (turn % 2 === 0){
+        if (turn % 2 === 1){
+            board[box.dataset.index-1] = player1.mark;
             box.textContent = player1.mark;
         } else {
+            board[box.dataset.index-1] = player2.mark;
             box.textContent = player2.mark;
         }
+        console.log(board)
     }
 
     const renderBoard = function() {
