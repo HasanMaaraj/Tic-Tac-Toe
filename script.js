@@ -11,6 +11,7 @@ const gameBoard = (function() {
 
     markPlayer = (box) => {
         // Mark the box based on who's turn is it
+        box.classList.remove('unmarked')
         if (turn % 2 === 0){
             box.textContent = player1.mark;
         } else {
@@ -24,6 +25,7 @@ const gameBoard = (function() {
         Array.from(gameBoard.childNodes).forEach((box) => {
             box.remove()
         })
+        // Add nine boxes
         for (let i=0; i < 9; i++) {
             const newBox = document.createElement('div');
             newBox.textContent = board[i];
@@ -37,8 +39,6 @@ const gameBoard = (function() {
         renderBoard();
         let boxes = document.querySelectorAll('.box');
         boxes.forEach((box) => {
-            // Empty all boxes
-            box.textContent = '';
             box.addEventListener('click', () => {
                 //  Trigger event listener only if box is empty
                 if (box.textContent === '') {
@@ -48,5 +48,7 @@ const gameBoard = (function() {
             })
         })
     }
-    startGame();
+    return {startGame};
 })();
+
+gameBoard.startGame();
