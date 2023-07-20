@@ -3,8 +3,8 @@ const gameBoard = (function() {
         return {name, mark}
     }
 
-    let player1 = playerFactory('Hasan', 'X');
-    let player2 = playerFactory('Foo', 'O');
+    let player1 = playerFactory('Player 1', 'X');
+    let player2 = playerFactory('Player 2', 'O');
     let turn = 1;
     let board = ["", "", "", "", "", "", "", "", ""];
     let winner = null;
@@ -66,7 +66,18 @@ const gameBoard = (function() {
             winnerDisplay.classList = ''; 
         }
 
-        return {getPlayersInformation, displayPlayers, displayWinner, clearResult}
+        const displayPlayersTurn = function() {
+            const turnDisplay = document.querySelector('#winner-display');
+            if (turn % 2 === 1){
+                turnDisplay.textContent = `${player1.name}'s Turn ${player1.mark}`;
+                turnDisplay.className = player1.mark;
+            } else {
+                turnDisplay.textContent = `${player2.name}'s Turn ${player2.mark}`;
+                turnDisplay.className = player2.mark;
+            }
+        }
+
+        return {getPlayersInformation, displayPlayers, displayWinner, clearResult, displayPlayersTurn}
     })();
 
 
@@ -85,6 +96,7 @@ const gameBoard = (function() {
     }
 
     const announceTie = function() {
+        displayControll.clearResult();
         displayControll.displayResults(`It's a Tie!`)
     }
 
@@ -94,7 +106,7 @@ const gameBoard = (function() {
             markPlayer(this);
             turn++;
             checkWinner();
-            // if (winner === null) displayPlayersTurn();
+            if (winner === null) displayControll.displayPlayersTurn();
             console.log(turn)
        }
    }
@@ -157,6 +169,7 @@ const gameBoard = (function() {
         turn = 1;
         board = ["", "", "", "", "", "", "", "", ""];
         winner = null;
+        displayControll.clearResult();
         renderBoard();
         let boxes = document.querySelectorAll('.box');
         boxes.forEach((box) => {
