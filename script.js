@@ -8,7 +8,26 @@ const gameBoard = (function() {
     let turn = 1;
     let board = ["", "", "", "", "", "", "", "", ""];
     let winner = null;
+    const winningCombos = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6],
+    ]
 
+    const checkWinner = function() {
+        for (let i=0; i<winningCombos.length; i++) {
+            if (board[winningCombos[i][0]]
+                && board[winningCombos[i][0]] === board[winningCombos[i][1]] 
+                && board[winningCombos[i][0]] === board[winningCombos[i][2]]) {
+                announceWinner(winningCombos[i][0]);
+            }
+        }
+    }
     markPlayer = (box) => {
         // Mark the box based on who's turn is it
         box.classList.remove('unmarked')
@@ -38,6 +57,7 @@ const gameBoard = (function() {
         }
     }
 
+
     const startGame = function(){
         renderBoard();
         let boxes = document.querySelectorAll('.box');
@@ -46,12 +66,13 @@ const gameBoard = (function() {
                 //  Trigger event listener only if box is empty
                 if (box.textContent === '') {
                     markPlayer(box);
+                    checkWinner();
                     turn++;
                 }
             })
         })
     }
-    return {startGame};
+    return {startGame, checkWinner};
 })();
 
 gameBoard.startGame();
