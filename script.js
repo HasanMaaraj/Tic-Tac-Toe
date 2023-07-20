@@ -31,11 +31,29 @@ const gameBoard = (function() {
         }
     }
 
+    const onClickEvent = function() {
+        //  Trigger event listener only if box is empty
+        if (this.textContent === '') {
+           markPlayer(this);
+           checkWinner();
+           turn++;
+       }
+   }
+
+    const stopGame = function() {
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach((box) => {
+            box.removeEventListener('click', onClickEvent);
+            box.classList.remove('unmarked')
+        });
+    }
+
     const checkWinner = function() {
         for (let i=0; i<winningCombos.length; i++) {
             if (board[winningCombos[i][0]]
                 && board[winningCombos[i][0]] === board[winningCombos[i][1]] 
                 && board[winningCombos[i][0]] === board[winningCombos[i][2]]) {
+                stopGame()
                 announceWinner(board[winningCombos[i][0]], winningCombos[i]);
             }
         }
@@ -70,19 +88,13 @@ const gameBoard = (function() {
         }
     }
 
+    
 
     const startGame = function(){
         renderBoard();
         let boxes = document.querySelectorAll('.box');
         boxes.forEach((box) => {
-            box.addEventListener('click', () => {
-                //  Trigger event listener only if box is empty
-                if (box.textContent === '') {
-                    markPlayer(box);
-                    checkWinner();
-                    turn++;
-                }
-            })
+            box.addEventListener('click', onClickEvent)
         })
     }
     return {startGame, checkWinner};
