@@ -30,7 +30,7 @@ const gameBoard = (function() {
             const display = document.querySelector('#players-display');
             Array.from(display.childNodes).forEach(node => {node.remove()});
             const player1Display = document.createElement('div');
-            player1Display.className = 'player-display';
+            player1Display.classList = 'player-display X';
             const player1Name = document.createElement('div');
             player1Name.className = 'player-name';
             player1Name.textContent = player1.name;
@@ -42,7 +42,7 @@ const gameBoard = (function() {
             display.appendChild(player1Display);
     
             const player2Display = document.createElement('div');
-            player2Display.className = 'player-display';
+            player2Display.classList = 'player-display O';
             const player2Name = document.createElement('div');
             player2Name.className = 'player-name';
             player2Name.textContent = player2.name;
