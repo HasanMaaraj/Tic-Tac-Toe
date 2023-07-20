@@ -15,7 +15,7 @@ body {
     gap: 20px;
     background-color: rgb(255, 187, 61);
     width: 700px;
-    height: +700px;
+    height: 700px;
 }
 
 .box {
@@ -40,6 +40,32 @@ body {
 
 .winning-combo {
     background-color: greenyellow;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 24px;
+}
+
+#buttons button {
+    border-radius: 10px;
+    color: white;
+    font-size: 1.5rem;
+    padding: 12px;
+    box-shadow: 1px 1px 5px grey;
+    background-color: rgb(255, 187, 61);
+    border: none;
+}
+
+#buttons button:hover {
+    background-color: rgb(255, 199, 95);
+    box-shadow: 1px 1px 5px lightgrey;
+}
+
+#buttons button:active {
+    background-color: rgb(255, 174, 22);
+    box-shadow: 1px 1px 5px black;
 }
 
 #players-display {
