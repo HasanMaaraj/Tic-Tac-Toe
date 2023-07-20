@@ -64,6 +64,7 @@ body {
 }
 
 #buttons button:active {
+    color: lightgrey;
     background-color: rgb(255, 174, 22);
     box-shadow: 1px 1px 5px black;
 }
