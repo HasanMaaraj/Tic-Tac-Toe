@@ -19,15 +19,24 @@ const gameBoard = (function() {
         [2,4,6],
     ]
 
+    const announceWinner = function(mark, combo) {
+        if (mark === player1.mark){
+            console.log(`Player ${player1.name} Won!`)
+        } else {
+            console.log(`Player ${player2.name} Won!`)
+        }
+    }
+
     const checkWinner = function() {
         for (let i=0; i<winningCombos.length; i++) {
             if (board[winningCombos[i][0]]
                 && board[winningCombos[i][0]] === board[winningCombos[i][1]] 
                 && board[winningCombos[i][0]] === board[winningCombos[i][2]]) {
-                announceWinner(winningCombos[i][0]);
+                announceWinner(board[winningCombos[i][0]], winningCombos[i]);
             }
         }
     }
+
     markPlayer = (box) => {
         // Mark the box based on who's turn is it
         box.classList.remove('unmarked')
