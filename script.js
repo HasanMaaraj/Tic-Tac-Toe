@@ -41,10 +41,10 @@ const gameBoard = (function() {
         // Mark the box based on who's turn is it
         box.classList.remove('unmarked')
         if (turn % 2 === 1){
-            board[box.dataset.index-1] = player1.mark;
+            board[box.dataset.index] = player1.mark;
             box.textContent = player1.mark;
         } else {
-            board[box.dataset.index-1] = player2.mark;
+            board[box.dataset.index] = player2.mark;
             box.textContent = player2.mark;
         }
         console.log(board)
@@ -60,7 +60,7 @@ const gameBoard = (function() {
         for (let i=0; i < 9; i++) {
             const newBox = document.createElement('div');
             newBox.textContent = board[i];
-            newBox.dataset.index = i+1;
+            newBox.dataset.index = i;
             newBox.classList = 'box unmarked'
             gameBoard.appendChild(newBox);
         }
