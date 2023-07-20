@@ -3,8 +3,8 @@ const gameBoard = (function() {
         return {name, mark}
     }
 
-    const player1 = playerFactory('Hasan', 'X');
-    const player2 = playerFactory('Foo', 'O');
+    let player1 = playerFactory('Hasan', 'X');
+    let player2 = playerFactory('Foo', 'X');
     let turn = 1;
     let board = ["", "", "", "", "", "", "", "", ""];
     let winner = null;
@@ -19,30 +19,41 @@ const gameBoard = (function() {
         [2,4,6],
     ]
     const displayControll = (function(){
-        const display = document.querySelector('#display');
-        const player1Display = document.createElement('div');
-        player1Display.className = 'player-display'
-        const player1Name = document.createElement('div');
-        player1Name.className = 'player-name'
-        player1Name.textContent = player1.name;
-        player1Display.appendChild(player1Name);
-        const player1Mark = document.createElement('div');
-        player1Mark.className = 'player-mark'
-        player1Mark.textContent = player1.mark;
-        player1Display.appendChild(player1Mark);
-        display.appendChild(player1Display)
-
-        const player2Display = document.createElement('div');
-        player2Display.className = 'player-display'
-        const player2Name = document.createElement('div');
-        player2Name.className = 'player-name'
-        player2Name.textContent = player2.name;
-        player2Display.appendChild(player2Name);
-        const player2Mark = document.createElement('div');
-        player2Mark.className = 'player-mark'
-        player2Mark.textContent = player2.mark;
-        player2Display.appendChild(player2Mark);
-        display.appendChild(player2Display)
+        const getPlayersInformation = function() {
+            let player1Name = prompt('Player 1 Name:');
+            let player2Name = prompt('Player 2 Name:');
+            // Re-assign player names
+            player1 = playerFactory(player1Name, 'X');
+            player2 = playerFactory(player2Name, 'O');
+        }
+        displayPlayers = function() {
+            const display = document.querySelector('#display');
+            Array.from(display.childNodes).forEach(node => {node.remove()});
+            const player1Display = document.createElement('div');
+            player1Display.className = 'player-display';
+            const player1Name = document.createElement('div');
+            player1Name.className = 'player-name';
+            player1Name.textContent = player1.name;
+            player1Display.appendChild(player1Name);
+            const player1Mark = document.createElement('div');
+            player1Mark.className = 'player-mark';
+            player1Mark.textContent = player1.mark;
+            player1Display.appendChild(player1Mark);
+            display.appendChild(player1Display);
+    
+            const player2Display = document.createElement('div');
+            player2Display.className = 'player-display';
+            const player2Name = document.createElement('div');
+            player2Name.className = 'player-name';
+            player2Name.textContent = player2.name;
+            player2Display.appendChild(player2Name);
+            const player2Mark = document.createElement('div');
+            player2Mark.className = 'player-mark';
+            player2Mark.textContent = player2.mark;
+            player2Display.appendChild(player2Mark);
+            display.appendChild(player2Display);
+        }
+        return {displayPlayers}
     })();
     const announceWinner = function(mark, combo) {
         if (mark === player1.mark){
@@ -120,7 +131,8 @@ const gameBoard = (function() {
             box.addEventListener('click', onClickEvent)
         })
     }
-    return {startGame, checkWinner};
+    return {startGame, displayControll};
 })();
 
 gameBoard.startGame();
+gameBoard.displayControll.displayPlayers();
