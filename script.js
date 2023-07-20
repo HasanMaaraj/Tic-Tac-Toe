@@ -18,7 +18,32 @@ const gameBoard = (function() {
         [0,4,8],
         [2,4,6],
     ]
+    const displayControll = (function(){
+        const display = document.querySelector('#display');
+        const player1Display = document.createElement('div');
+        player1Display.className = 'player-display'
+        const player1Name = document.createElement('div');
+        player1Name.className = 'player-name'
+        player1Name.textContent = player1.name;
+        player1Display.appendChild(player1Name);
+        const player1Mark = document.createElement('div');
+        player1Mark.className = 'player-mark'
+        player1Mark.textContent = player1.mark;
+        player1Display.appendChild(player1Mark);
+        display.appendChild(player1Display)
 
+        const player2Display = document.createElement('div');
+        player2Display.className = 'player-display'
+        const player2Name = document.createElement('div');
+        player2Name.className = 'player-name'
+        player2Name.textContent = player2.name;
+        player2Display.appendChild(player2Name);
+        const player2Mark = document.createElement('div');
+        player2Mark.className = 'player-mark'
+        player2Mark.textContent = player2.mark;
+        player2Display.appendChild(player2Mark);
+        display.appendChild(player2Display)
+    })();
     const announceWinner = function(mark, combo) {
         if (mark === player1.mark){
             console.log(`Player ${player1.name} Won!`)
@@ -53,13 +78,13 @@ const gameBoard = (function() {
             if (board[winningCombos[i][0]]
                 && board[winningCombos[i][0]] === board[winningCombos[i][1]] 
                 && board[winningCombos[i][0]] === board[winningCombos[i][2]]) {
-                stopGame()
+                stopGame();
                 announceWinner(board[winningCombos[i][0]], winningCombos[i]);
             }
         }
     }
 
-    markPlayer = (box) => {
+    const markPlayer = (box) => {
         // Mark the box based on who's turn is it
         box.classList.remove('unmarked')
         if (turn % 2 === 1){
@@ -87,8 +112,6 @@ const gameBoard = (function() {
             gameBoard.appendChild(newBox);
         }
     }
-
-    
 
     const startGame = function(){
         renderBoard();
