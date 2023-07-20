@@ -4,7 +4,7 @@ const gameBoard = (function() {
     }
 
     let player1 = playerFactory('Hasan', 'X');
-    let player2 = playerFactory('Foo', 'X');
+    let player2 = playerFactory('Foo', 'O');
     let turn = 1;
     let board = ["", "", "", "", "", "", "", "", ""];
     let winner = null;
@@ -55,10 +55,14 @@ const gameBoard = (function() {
         }
         return {displayPlayers}
     })();
+
+
     const announceWinner = function(mark, combo) {
         if (mark === player1.mark){
+            winner = player1;
             console.log(`Player ${player1.name} Won!`)
         } else {
+            winner = player2;
             console.log(`Player ${player2.name} Won!`)
         }
         for (let i=0; i < combo.length; i++) {
@@ -67,12 +71,17 @@ const gameBoard = (function() {
         }
     }
 
+    announceTie = function() {
+        console.log(`Player ${player1.name} Won!`)
+    }
+
     const onClickEvent = function() {
         //  Trigger event listener only if box is empty
         if (this.textContent === '') {
-           markPlayer(this);
-           checkWinner();
-           turn++;
+            markPlayer(this);
+            turn++;
+            checkWinner();
+            console.log(turn)
        }
    }
 
@@ -92,6 +101,9 @@ const gameBoard = (function() {
                 stopGame();
                 announceWinner(board[winningCombos[i][0]], winningCombos[i]);
             }
+        }
+        if (turn === 10 && winner === null){
+            announceTie();
         }
     }
 
@@ -125,6 +137,9 @@ const gameBoard = (function() {
     }
 
     const startGame = function(){
+        turn = 1;
+        board = ["", "", "", "", "", "", "", "", ""];
+        winner = null;
         renderBoard();
         let boxes = document.querySelectorAll('.box');
         boxes.forEach((box) => {
