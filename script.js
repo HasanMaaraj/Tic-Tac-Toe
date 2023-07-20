@@ -22,9 +22,13 @@ const gameBoard = (function() {
         const getPlayersInformation = function() {
             let player1Name = prompt('Player 1 Name:');
             let player2Name = prompt('Player 2 Name:');
-            // Re-assign player names
-            player1 = playerFactory(player1Name, 'X');
-            player2 = playerFactory(player2Name, 'O');
+            // Re-assign player names if inputed
+            if (player1Name) {
+                player1 = playerFactory(player1Name, 'X');
+            }
+            if (player2Name) {
+                player2 = playerFactory(player2Name, 'O');
+            }
         }
         const displayPlayers = function() {
             const display = document.querySelector('#players-display');
