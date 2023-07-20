@@ -125,9 +125,11 @@ const gameBoard = (function() {
         // Mark the box based on who's turn is it
         box.classList.remove('unmarked')
         if (turn % 2 === 1){
+            box.classList.add(`${player1.mark}`)
             board[box.dataset.index] = player1.mark;
             box.textContent = player1.mark;
         } else {
+            box.classList.add(`${player2.mark}`)
             board[box.dataset.index] = player2.mark;
             box.textContent = player2.mark;
         }

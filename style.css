@@ -67,3 +67,11 @@ body {
     text-align: center;
     font-size: 3rem;
 }
+
+.X {
+    color: blue;
+}
+
+.O {
+    color: red;
+}
