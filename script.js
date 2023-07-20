@@ -60,6 +60,12 @@ const gameBoard = (function() {
             winnerDisplay.className = player.mark;
         }
 
+        const displayTie = function() {
+            const winnerDisplay = document.querySelector('#winner-display');
+            winnerDisplay.textContent = 'It\'s a Tie!'
+            winnerDisplay.classList = '';
+        }
+
         const clearResult = function() {
             const winnerDisplay = document.querySelector('#winner-display');
             winnerDisplay.textContent = '';
@@ -77,7 +83,7 @@ const gameBoard = (function() {
             }
         }
 
-        return {getPlayersInformation, displayPlayers, displayWinner, clearResult, displayPlayersTurn}
+        return {getPlayersInformation, displayPlayers, displayWinner, displayTie, clearResult, displayPlayersTurn}
     })();
 
 
@@ -95,9 +101,15 @@ const gameBoard = (function() {
         }
     }
 
-    const announceTie = function() {
-        displayControll.clearResult();
-        displayControll.displayResults(`It's a Tie!`)
+    // const announceTie = function() {
+    //     displayControll.displayTie();
+    // }
+    const stopGame = function() {
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach((box) => {
+            box.removeEventListener('click', onClickEvent);
+            box.classList.remove('unmarked')
+        });
     }
 
     const onClickEvent = function() {
@@ -107,17 +119,14 @@ const gameBoard = (function() {
             turn++;
             checkWinner();
             if (winner === null) displayControll.displayPlayersTurn();
+            if (turn === 10 && winner === null){
+                stopGame();
+                displayControll.displayTie();
+            }
             console.log(turn)
        }
    }
 
-    const stopGame = function() {
-        const boxes = document.querySelectorAll('.box');
-        boxes.forEach((box) => {
-            box.removeEventListener('click', onClickEvent);
-            box.classList.remove('unmarked')
-        });
-    }
 
     const checkWinner = function() {
         for (let i=0; i<winningCombos.length; i++) {
@@ -127,10 +136,6 @@ const gameBoard = (function() {
                 stopGame();
                 announceWinner(board[winningCombos[i][0]], winningCombos[i]);
             }
-        }
-        if (turn === 10 && winner === null){
-            stopGame();
-            announceTie();
         }
     }
 
