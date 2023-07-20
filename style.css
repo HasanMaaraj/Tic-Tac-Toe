@@ -41,3 +41,24 @@ body {
 .winning-combo {
     background-color: greenyellow;
 }
+
+#display {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.player-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.player-name {
+    font-size: 3.3rem;
+}
+
+.player-mark {
+    font-size: 2rem;
+    text-align: center;
+}
