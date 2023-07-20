@@ -25,6 +25,10 @@ const gameBoard = (function() {
         } else {
             console.log(`Player ${player2.name} Won!`)
         }
+        for (let i=0; i < combo.length; i++) {
+            const comboBox = document.querySelector(`div[data-index="${combo[i]}"]`);
+            comboBox.classList.add('winning-combo');
+        }
     }
 
     const checkWinner = function() {

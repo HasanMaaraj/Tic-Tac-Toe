@@ -37,3 +37,7 @@ body {
 .unmarked:active {
     background-color: cornflowerblue;
 }
+
+.winning-combo {
+    background-color: greenyellow;
+}
