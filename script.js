@@ -84,7 +84,7 @@ const gameBoard = (function() {
         }
     }
 
-    announceTie = function() {
+    const announceTie = function() {
         displayControll.displayResults(`It's a Tie!`)
     }
 
@@ -94,6 +94,7 @@ const gameBoard = (function() {
             markPlayer(this);
             turn++;
             checkWinner();
+            // if (winner === null) displayPlayersTurn();
             console.log(turn)
        }
    }
@@ -167,3 +168,11 @@ const gameBoard = (function() {
 
 gameBoard.startGame();
 gameBoard.displayControll.displayPlayers();
+
+const restartButton = document.querySelector('#restart');
+restartButton.addEventListener('click', gameBoard.startGame);
+const editPlayersButton = document.querySelector('#edit');
+editPlayersButton.addEventListener('click', () => {
+    gameBoard.displayControll.getPlayersInformation();
+    gameBoard.displayControll.displayPlayers();
+});
