@@ -27,7 +27,7 @@ const gameBoard = (function() {
             player2 = playerFactory(player2Name, 'O');
         }
         displayPlayers = function() {
-            const display = document.querySelector('#display');
+            const display = document.querySelector('#players-display');
             Array.from(display.childNodes).forEach(node => {node.remove()});
             const player1Display = document.createElement('div');
             player1Display.className = 'player-display';
