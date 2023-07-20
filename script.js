@@ -54,25 +54,29 @@ const gameBoard = (function() {
             display.appendChild(player2Display);
         }
 
-        const displayResults = function(result) {
-            document.querySelector('#winner-display').textContent = result
+        const displayWinner = function(player) {
+            const winnerDisplay = document.querySelector('#winner-display');
+            winnerDisplay.textContent = `${player.name} Won!`;
+            winnerDisplay.className = player.mark;
         }
 
         const clearResult = function() {
-            document.querySelector('#winner-display').textContent = '' 
+            const winnerDisplay = document.querySelector('#winner-display');
+            winnerDisplay.textContent = '';
+            winnerDisplay.classList = ''; 
         }
 
-        return {getPlayersInformation, displayPlayers, displayResults, clearResult}
+        return {getPlayersInformation, displayPlayers, displayWinner, clearResult}
     })();
 
 
     const announceWinner = function(mark, combo) {
         if (mark === player1.mark){
             winner = player1;
-            displayControll.displayResults(`${player1.name} Won!`)
+            displayControll.displayWinner(player1)
         } else {
             winner = player2;
-            displayControll.displayResults(`${player2.name} Won!`)
+            displayControll.displayWinner(player2)
         }
         for (let i=0; i < combo.length; i++) {
             const comboBox = document.querySelector(`div[data-index="${combo[i]}"]`);

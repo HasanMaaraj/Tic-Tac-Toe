@@ -62,3 +62,8 @@ body {
     font-size: 2rem;
     text-align: center;
 }
+
+#winner-display {
+    text-align: center;
+    font-size: 3rem;
+}
