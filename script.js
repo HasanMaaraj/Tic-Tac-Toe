@@ -18,6 +18,7 @@ const gameBoard = (function() {
         [0,4,8],
         [2,4,6],
     ]
+
     const displayControll = (function(){
         const getPlayersInformation = function() {
             let player1Name = prompt('Player 1 Name:');
@@ -30,9 +31,11 @@ const gameBoard = (function() {
                 player2 = playerFactory(player2Name, 'O');
             }
         }
+
         const displayPlayers = function() {
             const display = document.querySelector('#players-display');
             Array.from(display.childNodes).forEach(node => {node.remove()});
+            // Render player1's information
             const player1Display = document.createElement('div');
             player1Display.classList = 'player-display X';
             const player1Name = document.createElement('div');
@@ -44,7 +47,7 @@ const gameBoard = (function() {
             player1Mark.textContent = player1.mark;
             player1Display.appendChild(player1Mark);
             display.appendChild(player1Display);
-    
+            // Render player2's information
             const player2Display = document.createElement('div');
             player2Display.classList = 'player-display O';
             const player2Name = document.createElement('div');
@@ -59,6 +62,7 @@ const gameBoard = (function() {
         }
 
         const displayWinner = function(player) {
+            // Display the winner
             const statusDisplay = document.querySelector('#status-display');
             statusDisplay.textContent = `${player.name} Won!`;
             statusDisplay.className = player.mark;
@@ -71,6 +75,7 @@ const gameBoard = (function() {
         }
 
         const clearResult = function() {
+            // Clear the status-display div
             const statusDisplay = document.querySelector('#status-display');
             statusDisplay.textContent = '';
             statusDisplay.classList = ''; 
@@ -78,6 +83,7 @@ const gameBoard = (function() {
 
         const displayPlayersTurn = function() {
             const statusDisplay = document.querySelector('#status-display');
+            //  Display the player's turn based on the turn number
             if (turn % 2 === 1){
                 statusDisplay.textContent = `${player1.name}'s Turn ${player1.mark}`;
                 statusDisplay.className = player1.mark;
@@ -105,10 +111,8 @@ const gameBoard = (function() {
         }
     }
 
-    // const announceTie = function() {
-    //     displayControll.displayTie();
-    // }
     const stopGame = function() {
+        // Clear the event listeners to stop the game
         const boxes = document.querySelectorAll('.box');
         boxes.forEach((box) => {
             box.removeEventListener('click', onClickEvent);
@@ -133,6 +137,7 @@ const gameBoard = (function() {
 
 
     const checkWinner = function() {
+        // Loop through the winning combos and check if any is achieved
         for (let i=0; i<winningCombos.length; i++) {
             if (board[winningCombos[i][0]]
                 && board[winningCombos[i][0]] === board[winningCombos[i][1]] 
@@ -175,6 +180,7 @@ const gameBoard = (function() {
     }
 
     const startGame = function(){
+        // Clear and restart everything
         turn = 1;
         board = ["", "", "", "", "", "", "", "", ""];
         winner = null;
