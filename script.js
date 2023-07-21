@@ -59,31 +59,31 @@ const gameBoard = (function() {
         }
 
         const displayWinner = function(player) {
-            const winnerDisplay = document.querySelector('#winner-display');
-            winnerDisplay.textContent = `${player.name} Won!`;
-            winnerDisplay.className = player.mark;
+            const statusDisplay = document.querySelector('#status-display');
+            statusDisplay.textContent = `${player.name} Won!`;
+            statusDisplay.className = player.mark;
         }
 
         const displayTie = function() {
-            const winnerDisplay = document.querySelector('#winner-display');
-            winnerDisplay.textContent = 'It\'s a Tie!'
-            winnerDisplay.classList = '';
+            const statusDisplay = document.querySelector('#status-display');
+            statusDisplay.textContent = 'It\'s a Tie!'
+            statusDisplay.classList = '';
         }
 
         const clearResult = function() {
-            const winnerDisplay = document.querySelector('#winner-display');
-            winnerDisplay.textContent = '';
-            winnerDisplay.classList = ''; 
+            const statusDisplay = document.querySelector('#status-display');
+            statusDisplay.textContent = '';
+            statusDisplay.classList = ''; 
         }
 
         const displayPlayersTurn = function() {
-            const turnDisplay = document.querySelector('#winner-display');
+            const statusDisplay = document.querySelector('#status-display');
             if (turn % 2 === 1){
-                turnDisplay.textContent = `${player1.name}'s Turn ${player1.mark}`;
-                turnDisplay.className = player1.mark;
+                statusDisplay.textContent = `${player1.name}'s Turn ${player1.mark}`;
+                statusDisplay.className = player1.mark;
             } else {
-                turnDisplay.textContent = `${player2.name}'s Turn ${player2.mark}`;
-                turnDisplay.className = player2.mark;
+                statusDisplay.textContent = `${player2.name}'s Turn ${player2.mark}`;
+                statusDisplay.className = player2.mark;
             }
         }
 
@@ -179,6 +179,7 @@ const gameBoard = (function() {
         board = ["", "", "", "", "", "", "", "", ""];
         winner = null;
         displayControll.clearResult();
+        displayControll.displayPlayersTurn();
         renderBoard();
         let boxes = document.querySelectorAll('.box');
         boxes.forEach((box) => {
